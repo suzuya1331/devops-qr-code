@@ -32,7 +32,7 @@ s3 = boto3.client(
     endpoint_url=os.getenv("AWS_ENDPOINT"))
 
 bucket_name = os.getenv("BUCKET_NAME")
-
+base_url = os.getenv("SUPABASE_PUBLIC_URL")
 @app.post("/generate-qr/")
 async def generate_qr(url: str):
     # Generate QR Code
@@ -54,14 +54,16 @@ async def generate_qr(url: str):
 
     # Generate file name for S3
     file_name = f"qr_codes/{url.split('//')[-1]}.png"
+    print(file_name)
 
     try:
         # Upload to S3
         s3.put_object(Bucket=bucket_name, Key=file_name, Body=img_byte_arr, ContentType='image/png', ACL='public-read')
-        
         # Generate the S3 URL
-        s3_url = f"https://{bucket_name}.s3.amazonaws.com/{file_name}"
+        s3_url = f"{base_url}/{bucket_name}/{file_name}"
         return {"qr_code_url": s3_url}
     except Exception as e:
+        # print all environment variables
+        print(os.environ)
         raise HTTPException(status_code=500, detail=str(e))
     
