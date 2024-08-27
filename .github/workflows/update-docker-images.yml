@@ -15,6 +15,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: build backend
-        run: cd api && docker build -t shiro1331/devops-qr-code-backend .
+        run: docker build -t ${{ secrets.DOCKERHUB_TOKEN }}/devops-qr-code-backend ./api
       - name: build frontend
-        run: cd front-end-nextjs && docker build -t shiro1331/devops-qr-code-frontend .
+        run: docker build -t ${{ secrets.DOCKERHUB_TOKEN }}/devops-qr-code-frontend ./front-end-nextjs
