@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: check path
         run: ls -la
-      - name: build backend
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops-qr-code-backend ./api/Dockerfile
-      - name: build frontend
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops-qr-code-frontend ./front-end-nextjs/Dockerfile
+      - name: build docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops-qr-code-backend ./api
+      - name: build docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops-qr-code-frontend ./front-end-nextjs
