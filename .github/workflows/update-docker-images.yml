@@ -20,6 +20,6 @@ jobs:
       - name: check path
         run: ls -la
       - name: build backend
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops-qr-code-backend main/api
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops-qr-code-backend ./api/Dockerfile
       - name: build frontend
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops-qr-code-frontend main/front-end-nextjs
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops-qr-code-frontend ./front-end-nextjs/Dockerfile
